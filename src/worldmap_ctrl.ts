@@ -202,7 +202,7 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
     /*
      * Configure the Leaflet map widget.
      */
-    this.tileServer = contextSrv.user.lightTheme ? 'CARTO Positron' : 'CARTO Dark';
+    this.tileServer = 'Esri Satellite';
     this.setMapSaturationClass();
   }
 
@@ -212,6 +212,8 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
      */
     if (this.tileServer === 'CARTO Dark') {
       this.saturationClass = 'map-darken';
+    } else if (this.tileServer === 'Esri Satellite') {
+      this.saturationClass = 'map-desaturate';
     } else {
       this.saturationClass = '';
     }

@@ -21,6 +21,14 @@ const tileServers = {
       '&copy; <a href="https://carto.com/about-carto/" target="_blank" rel="noopener">CARTO</a>',
     subdomains: 'abcd',
   },
+  'Esri Satellite': {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Tiles &copy; Esri',
+    subdomains: 'abcd' },
+  'HERE Hybrid': {
+    url: 'https://{s}.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/hybrid.day/{z}/{x}/{y}/256/png8?app_id=<app_id>&app_code=<app_code>&lg=eng',
+    attribution: 'Map &copy; 1987-2014 <a href="http://developer.here.com">HERE</a>',
+    subdomains: '1234'}
 };
 
 export default class WorldMap {
