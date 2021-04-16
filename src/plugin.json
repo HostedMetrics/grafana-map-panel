@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "Satellite Map",
-  "id": "hm-satellite-map",
+  "id": "hm-satellite-map-panel",
 
   "info": {
     "description": "Grafana Map Panel. Displays time series data or geohash data on a world map.",
