@@ -109,6 +109,7 @@ export default class DataFormatter {
             locationName: location.name,
             locationLatitude: location.latitude,
             locationLongitude: location.longitude,
+            link: location.link,
             value: serie.stats[this.settings.valueName],
             valueFormatted: lastValue,
             valueRounded: 0,
@@ -158,6 +159,7 @@ export default class DataFormatter {
       locationName: point.name,
       locationLatitude: point.latitude,
       locationLongitude: point.longitude,
+      link: point.link,
       value: point.value !== undefined ? point.value : 1,
       valueRounded: 0,
     };
