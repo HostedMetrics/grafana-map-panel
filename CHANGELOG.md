@@ -3,6 +3,9 @@
 ## development
 
 ## v0.17.0
+- Changed the plugin id to end with `-panel`, as required.
+
+## v0.17.0
 - Changed the plugin's id and name.
 
 ## v0.16.0

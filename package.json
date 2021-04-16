@@ -1,6 +1,6 @@
 {
-  "name": "hm-satellite-map",
-  "version": "0.17.0",
+  "name": "hm-satellite-map-panel",
+  "version": "0.17.2",
   "description": "Satellite Map Panel",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
