@@ -2,7 +2,10 @@
 
 ## development
 
-## v0.17.0
+## v0.17.3
+- Make the link from the json data available as a field.
+
+## v0.17.2
 - Changed the plugin id to end with `-panel`, as required.
 
 ## v0.17.0
