@@ -2,6 +2,9 @@
 
 ## development
 
+## v0.17.0
+- Changed the plugin's id and name.
+
 ## v0.16.0
 - Switched to satellite view. Thanks @svet-b: https://github.com/grafana/worldmap-panel/compare/aac5e37d53b27df2d728f7da7fc0dafc2c7db6e2...ammpio:1ae15419f409fa1bacf6c329f772bd9eccb84483
 
