@@ -2,6 +2,9 @@
 
 ## development
 
+## v0.17.4
+- Make the link from the json data available as a field.
+
 ## v0.17.3
 - Make the link from the json data available as a field.
 

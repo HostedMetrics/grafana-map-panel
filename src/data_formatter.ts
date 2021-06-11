@@ -435,6 +435,82 @@ export default class DataFormatter {
       this.addWarning('No data in table format received');
     }
   }
+  setTableValuesWithJsonData(tableData, data) {
+    if (tableData && tableData.length > 0) {
+      let highestValue = 0;
+      let lowestValue = Number.MAX_VALUE;
+
+      // Todo: Using hardcoded `tableData[0]` means
+      //  this will only use the first active query?
+      tableData[0].forEach(datapoint => {
+        let key;
+        let longitude;
+        let latitude;
+        let link;
+
+        // Todo: Think about introducing a "Ignore decoding errors" control option
+        //  in order to compensate for anything in here where the shit might hit the fan.
+        //  Essentially, this would mask all exceptions raised from this code.
+
+        // Assign value.
+        const value = datapoint.Value;
+        const valueRounded = kbn.roundValue(value, this.settings.decimals || 0);
+
+        // Assign latitude and longitude based on the json data.
+        const location = _.find(this.ctrl.locations, loc => {
+          return loc.key.toUpperCase() === datapoint.key.toUpperCase();
+        });
+        if (location) {
+          latitude = location.latitude;
+          longitude = location.longitude;
+          key = location.key;
+          link = location.link;
+        }
+
+        const dataValue = {
+          // Add location information.
+          key: key,
+          locationName: (location && location.name) || key,
+          locationLatitude: latitude,
+          locationLongitude: longitude,
+
+          // Add metric name and values.
+          value: value,
+          valueFormatted: value,
+          valueRounded: valueRounded,
+
+          // Add link.
+          link: link,
+
+          format: DataFormat.Table,
+        };
+
+        // Add all values from the original datapoint as attributes prefixed with `__field_`.
+        for (let key in datapoint) {
+          const value = datapoint[key];
+          key = '__field_' + key;
+          dataValue[key] = value;
+        }
+
+        // Bookkeeping for computing valueRange.
+        if (dataValue.value > highestValue) {
+          highestValue = dataValue.value;
+        }
+
+        if (dataValue.value < lowestValue) {
+          lowestValue = dataValue.value;
+        }
+
+        data.push(dataValue);
+      });
+
+      data.highestValue = highestValue;
+      data.lowestValue = lowestValue;
+      data.valueRange = highestValue - lowestValue;
+    } else {
+      this.addWarning('No data in table format received');
+    }
+  }
 
   setJsonValues(series, data) {
     if (series && series.length > 0) {

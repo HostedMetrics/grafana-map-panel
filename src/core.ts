@@ -148,10 +148,18 @@ export class WorldmapCore {
       // we need to pass series here, because setJsonValues accesses the series in the ctrl which is not set at this moment
       this.dataFormatter.setJsonValues(series, data);
     } else if (this.settings.locationData) {
-      this.assertDataFormat(dataFormat === DataFormat.Timeseries, dataFormat, DataFormat.Timeseries);
-      console.info('Interpreting data as timeseries format');
-      series = dataList.map(this.dataFormatter.seriesHandler.bind(this));
-      this.dataFormatter.setTimeseriesValues(series, data);
+      if (dataFormat === DataFormat.Timeseries) {
+        this.assertDataFormat(dataFormat === DataFormat.Timeseries, dataFormat, DataFormat.Timeseries);
+        console.info('Interpreting data as timeseries format');
+        series = dataList.map(this.dataFormatter.seriesHandler.bind(this));
+        this.dataFormatter.setTimeseriesValues(series, data);
+      } else if (dataFormat === DataFormat.Table) {
+        console.info('Interpreting data as table format');
+        series = dataList.map(DataFormatter.tableHandler.bind(this));
+        this.dataFormatter.setTableValuesWithJsonData(series, data);
+      } else {
+        throw new DataError('Expecting data formatted in the timeseries or table formats.');
+      }
     } else {
       throw new DataError('No data format and mapping selected');
     }

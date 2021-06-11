@@ -34,6 +34,13 @@ const tileServers = {
   },
 };
 
+export enum DataFormat {
+  Table = 'table',
+  Timeseries = 'timeseries',
+  // Fixme: Add detection for other data formats.
+  //Json = 'json',
+}
+
 export default class WorldMap {
   ctrl: WorldmapCtrl;
   mapContainer: any;
@@ -468,7 +475,11 @@ export default class WorldMap {
         })
         .join('');
 
-      return `${locationName}: ${value} ${unit || ''}${freeDataDisplay}`.trim();
+      if (dataPoint.format === DataFormat.Table) {
+        return `${locationName}: ${value} ${unit || ''}`.trim();
+      } else {
+        return `${locationName}: ${value} ${unit || ''}${freeDataDisplay}`.trim();
+      }
     }
   }
 
